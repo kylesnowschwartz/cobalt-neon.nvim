@@ -1,0 +1,114 @@
+*cobalt-neon.txt*  Cyberpunk colorscheme for Neovim
+
+==============================================================================
+CONTENTS                                                  *cobalt-neon-contents*
+
+  1. Introduction ........................... |cobalt-neon-introduction|
+  2. Installation ........................... |cobalt-neon-installation|
+  3. Configuration .......................... |cobalt-neon-configuration|
+  4. Palette ................................ |cobalt-neon-palette|
+  5. Functions .............................. |cobalt-neon-functions|
+
+==============================================================================
+1. INTRODUCTION                                       *cobalt-neon-introduction*
+
+cobalt-neon.nvim is a cyberpunk Neovim colorscheme based on the Cobalt Neon
+iTerm2 theme, with fixed ANSI semantics and comprehensive plugin support.
+
+Features:
+- Dark theme with neon green foreground and deep blue background
+- Fixed ANSI color semantics
+- Full Treesitter and LSP semantic token support
+- Plugin support for Telescope, Mini.nvim, Gitsigns, and more
+- Configurable: transparent mode, italics, bold, custom overrides
+
+==============================================================================
+2. INSTALLATION                                       *cobalt-neon-installation*
+
+Using lazy.nvim: >lua
+  {
+    "kylesnowschwartz/cobalt-neon.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("cobalt-neon").setup()
+      vim.cmd.colorscheme("cobalt-neon")
+    end,
+  }
+<
+
+==============================================================================
+3. CONFIGURATION                                     *cobalt-neon-configuration*
+
+Call |cobalt-neon.setup()| before loading the colorscheme: >lua
+
+  require("cobalt-neon").setup({
+    terminal_colors = true,   -- Set terminal ANSI colors
+    transparent_mode = false, -- Transparent background
+    dim_inactive = false,     -- Dim inactive windows
+    undercurl = true,         -- Use undercurl for diagnostics
+    underline = true,         -- Use underline
+    bold = true,              -- Use bold
+
+    italic = {
+      strings = false,
+      comments = true,
+      keywords = false,
+      functions = false,
+      variables = false,
+    },
+
+    palette_overrides = {},   -- Override specific palette colors
+    overrides = {},           -- Override specific highlight groups
+  })
+<
+
+                                               *cobalt-neon-palette-overrides*
+Override specific colors in the palette: >lua
+  require("cobalt-neon").setup({
+    palette_overrides = {
+      bg = "#0D1E28",        -- Darker background
+      green = "#00FF00",     -- Different green
+    },
+  })
+<
+
+                                           *cobalt-neon-highlight-overrides*
+Override specific highlight groups: >lua
+  require("cobalt-neon").setup({
+    overrides = {
+      Comment = { fg = "#7A9AAA", italic = true },
+      Function = { bold = false },
+    },
+  })
+<
+
+==============================================================================
+4. PALETTE                                                 *cobalt-neon-palette*
+
+The Cobalt Neon palette (cleaned up from iTerm2):
+
+  Background:     #142838   Deep blue
+  Foreground:     #8FF586   Neon green
+  Red:            #FF231F   Bright red
+  Green:          #8FF586   Neon green
+  Yellow:         #E9E75C   Warm yellow
+  Blue:           #3BA5FF   Bright blue
+  Magenta:        #781AA0   Deep purple
+  Cyan:           #5FCED8   Teal cyan
+  Orange:         #FF9D00   Warm orange
+  Purple/Cursor:  #C4206F   Hot pink
+
+==============================================================================
+5. FUNCTIONS                                             *cobalt-neon-functions*
+
+                                                          *cobalt-neon.setup()*
+cobalt-neon.setup({opts})
+    Configure the colorscheme. Must be called before loading.
+
+                                                           *cobalt-neon.load()*
+cobalt-neon.load()
+    Load the colorscheme. Automatically called by `:colorscheme cobalt-neon`.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
